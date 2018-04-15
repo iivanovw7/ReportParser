@@ -1,3 +1,3 @@
 Simple xml viewer
 
-![alt text](https://raw.githubusercontent.com/iivanow7/ReportParser/master/img/Screenshot from 2018-04-16 00-49-36.png)
+![alt text](https://github.com/iivanovw7/ReportParser/blob/master/img/Screenshot%20from%202018-04-16%2000-49-36.png)
