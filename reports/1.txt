@@ -1,1 +1,0 @@
-<root><instructions>Some ins text.</instructions><options><option>1.png</option><option>2.png</option><option>3.png</option><option>4.png</option></options><noOfOptions>4</noOfOptions></root>
