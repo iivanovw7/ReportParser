@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Energy reports</title>
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/fileUpload.css">
+
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row titleWrapper">
+        <div class="col-8">
+            <div><h2>Просмотр отчетов "Energy Alpha"</h2>
+                <p>ООО "РУСЭНЕРГОСБЫТ" (ООО "Хоккейный клуб СКА")</p>
+            </div>
+        </div>
+        <div class="col-4 uploadBlock">
+            <div class="file-upload uploadWrapper">
+                <label>
+                    <input type="file"
+                           name="file"
+                           onchange='openFile(event)'
+                           accept='xml'>
+                    <span>Загрузить файл отчета</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row titleWrapper">
+        <div class="row infoBlock">
+            <div id="placeHolder" class="column infoHolder"></div>
+            <div id="fileSender"></div>
+        </div>
+        <div class="row timeInfo">
+            <div id="fileDate"></div>
+            <div id="timeStamp"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-5" id="infoblock">
+            <div class="row">
+                <h5 id="inputNumber"></h5>
+                <table class="sumTable" id="sumtableAPRP" style="width:100%; margin-bottom: 20px">
+                </table>
+                <table class="mainTable" style="width:100%" id="valuesHeader">
+                </table>
+                <table class="mainTable" style="width:100%" id="values">
+                </table>
+            </div>
+        </div>
+        <div class="col-7">
+            <div class="column">
+                <div id="chartAP60"></div>
+                <div class="ct-chart ct-golden-section" id="chart1"></div>
+                <div id="chartAP120"></div>
+                <div class="ct-chart ct-golden-section" id="chart2"></div>
+                <div id="chartRP60"></div>
+                <div class="ct-chart ct-golden-section" id="chart3"></div>
+                <div id="chartRP120"></div>
+                <div class="ct-chart ct-golden-section" id="chart4"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="libs/jquery-3.2.1.js"></script>
+<script src="libs/chartist.js"></script>
+<script src="js/chart.js"></script>
+<script src="js/data.js"></script>
+<script src="js/infoParser.js"></script>
+<script src="libs/jquery-dateformat.js"></script>
+<script src="js/currentDate.js"></script>
+</body>
+</html>
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">

@@ -1,0 +1,79 @@
+.titleWrapper {
+    border-radius: 5px;
+    background-color: rgba(244, 239, 232, 0.84);;
+    margin: 20px;
+    padding: 10px;
+}
+
+.uploadBlock {
+    align-items: center;
+    display: inline-grid;
+    justify-content: end;
+}
+
+.infoBlock, .timeInfo {
+    padding-left: 30px;
+}
+
+.uploadWrapper {
+    margin: 10px;
+}
+
+.dateStyle {
+    text-decoration: underline;
+    color: red;
+}
+
+.timeInfo div {
+    margin-right: 10px;
+}
+
+.mainTable {
+    font-size: 1.4ch;
+    text-decoration: none;
+    font-style: italic;
+    border: 1px lightgray solid;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.mainTable th {
+    max-width: 10px;
+    text-align: center;
+    border: 1px lightgray solid;
+    justify-content: center;
+    align-items: center;
+    padding: 3px;
+}
+
+.sumTable {
+    font-size: 1.5ch;
+    text-decoration: none;
+    font-style: italic;
+    border: 1px #d3d3d3 solid;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.sumTable th {
+    max-width: 10px;
+    text-align: center;
+    border: 1px #fbf6ef solid;
+    justify-content: center;
+    align-items: center;
+    padding: 3px;
+    background-color: #a7d39b;
+}
+
+#valuesHeader {
+    background-color: rgba(244, 239, 232, 0.84);
+    padding: 2px;
+}
+
+#inputNumber, #pointType {
+    margin: 10px;
+}
