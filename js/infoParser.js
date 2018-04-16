@@ -29,7 +29,7 @@ var parseInfo = function(text) {
     var day         = dateString.substring(6,8);
     var date      	= year+'.'+month+'.'+day;
 
-    $("#fileDate").append( "Дата формирования отчета: " + "<span class=\"dateStyle\" >" + date + "</span>" );
+    $("#fileDate").append( "Дата формирования отчета: " + "<span class=\"dateStyle\" >" + date +"</span>" + " (гггг.мм.дд)" );
 
     $timeStamp = $xml.find('timestamp');
     var stampString = $timeStamp.text();

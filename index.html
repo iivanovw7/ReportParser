@@ -18,8 +18,9 @@
 <div class="container">
     <div class="row titleWrapper">
         <div class="col-8">
-            <div><h2>Просмотр отчетов "Energy Alpha"</h2>
+            <div><h2>Просмотр отчетов "ENERGY ALPHA"</h2>
                 <p>ООО "РУСЭНЕРГОСБЫТ" (ООО "Хоккейный клуб СКА")</p>
+                <p id="currTime">123</p>
             </div>
         </div>
         <div class="col-4 uploadBlock">
@@ -77,10 +78,16 @@
 <script src="libs/jquery-3.2.1.js"></script>
 <script src="libs/chartist.js"></script>
 <script src="js/chart.js"></script>
-<script src="js/data.js"></script>
 <script src="js/infoParser.js"></script>
 <script src="libs/jquery-dateformat.js"></script>
 <script src="js/currentDate.js"></script>
+<script src="libs/moment.js"></script>
+<script src="libs/chart.js"></script>
+
+
+<script>
+        document.getElementById("currTime").innerHTML = moment().format('MMMM Do YYYY, h:mm:ss a');
+</script>
 </body>
 </html>
 
