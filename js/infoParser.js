@@ -18,6 +18,8 @@ var openFile = function(event) {
 };
 
 
+
+
 var parseInfo = function(text) {
 	var xmlDoc = $.parseXML(text),
 		$xml = $(xmlDoc),
@@ -80,7 +82,7 @@ var parseReport = function(text) {
 
 
 
-
+    var fullWidthLabels = [];
     var chartAP = [];
     var chartRP = [];
 
@@ -106,6 +108,8 @@ var parseReport = function(text) {
         var EndMin = end.substring(2,4);
         chartAP.push($value01.text());
         chartRP.push($value03.text());
+        fullWidthLabels.push(start.substring(0,4));
+
 
         chartAP_sum += Number($value01.text());
         chartRP_sum += Number($value03.text());
@@ -114,6 +118,7 @@ var parseReport = function(text) {
         $("#values").append("<tr>"+"<th>"+i+"</th>"+"<th>"+StartHr+":"+StartMin+"</th>"+"<th>"+EndHr+":"+EndMin+"</th>"+
             "<th>"+$value01.text()+"</th>"+"<th>"+$value03.text()+"</th>"+"</tr>");
     }
+
 
     $("#valuesHeader").append("<tr>"+"<th>№</th>"+"<th>"+"<p>Начало периода</p>"+"</th>"+"<th>"+
         "<p>Окончание периода</p>"+"</th>"+"<th>"+"<p>Активная энергия (кВт*ч)</p>"+"</th>"+
@@ -125,27 +130,23 @@ var parseReport = function(text) {
     var chartAP_60 = [];
     for (var l = 0; l < chartAP.length; l = l+2) {
         chartAP_60.push(chartAP[l]);
-        console.log(chartAP[l])
     };
 
 
     var chartAP_120 = [];
     for (var t = 0; t < chartAP.length; t = t+4) {
         chartAP_120.push(chartAP[t]);
-        console.log(chartAP[t])
     };
 
     var chartRP_60 = [];
     for (var p = 0; p < chartRP.length; p = p+2) {
         chartRP_60.push(chartRP[p]);
-        console.log(chartRP[p])
     };
 
 
     var chartRP_120 = [];
     for (var u = 0; u < chartRP.length; u = u+4) {
         chartRP_120.push(chartRP[u]);
-        console.log(chartRP[u])
     };
 
 
@@ -234,6 +235,48 @@ var parseReport = function(text) {
 
 
     showTitles();
+
+
+    var ctx = document.getElementById("fullWidthChart").getContext('2d');
+    var fullChart01 = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [0,2,4,6,8,10,12,14,16,18,20,22,24],
+            datasets: [{
+                label: '# of Votes',
+                data: [chartRP_120],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+
+
+
 
 
 };

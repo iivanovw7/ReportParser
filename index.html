@@ -48,8 +48,10 @@
     </div>
 
     <div class="row">
+        <canvas id="fullWidthChart" style="display: none" width="100%">ttttt</canvas>
         <div class="col-5" id="infoblock">
             <div class="row">
+                <button onclick="fullChartCmd()">Try it</button>
                 <h5 id="inputNumber"></h5>
                 <table class="sumTable" id="sumtableAPRP" style="width:100%; margin-bottom: 20px">
                 </table>
@@ -82,12 +84,24 @@
 <script src="libs/jquery-dateformat.js"></script>
 <script src="js/currentDate.js"></script>
 <script src="libs/moment.js"></script>
-<script src="libs/chart.js"></script>
+<script src="libs/Chart.js"></script>
 
 
 <script>
         document.getElementById("currTime").innerHTML = moment().format('MMMM Do YYYY, h:mm:ss a');
 </script>
+
+<script>
+    function fullChartCmd() {
+        var x = document.getElementById("fullWidthChart");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>
+
 </body>
 </html>
 
