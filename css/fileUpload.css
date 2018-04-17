@@ -1,8 +1,8 @@
 .file-upload {
-    position: relative; /* Даем возможность делать позиционирование, внутри данного элемента */
-    overflow: hidden; /* Все что выходит за пределы - скрываем */
-    width: 200px; /* Задаем ширину кнопки выбора файла */
-    height: 40px; /* Задаем высоту кнопки выбора файла */
+    position: relative; 
+    overflow: hidden; 
+    width: 200px; 
+    height: 40px; 
     background: #6a7da0;
     border-radius: 3px;
     padding: 8px 4px;
@@ -13,10 +13,14 @@
     background: #798fb5;
 }
 .file-upload input[type="file"]{
-    display: none; /* Обязательно скрываем настоящий Input File */
+    display: none; 
 }
+
+.file-upload button{
+    display: none; 
+}
+
 .file-upload label {
-    /* Растягиваем label на всю возможную площадь блока .file-upload */
     display: block;
     position: absolute;
     top: 0;
@@ -26,5 +30,5 @@
     cursor: pointer;
 }
 .file-upload span {
-    line-height: 40px; /* Делаем вертикальное выравнивание текста, который написан на кнопке */
+    line-height: 40px;
 }

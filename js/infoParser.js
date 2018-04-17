@@ -1,6 +1,10 @@
 $( document ).ready(function() {
+    $("#FullChartBtn").hide();
     $("#placeHolder").append("Для вывода отчета загрузите файл с расширением XML");
+    
 });
+
+
 
 var openFile = function(event) {
 	var input = event.target;
@@ -10,11 +14,16 @@ var openFile = function(event) {
         text = reader.result;
         parseInfo(text);
         parseReport(text);
+        reportParser(text, 0);
+        reportParser(text, 1);
+        reportParser(text, 2);
+        reportParser(text, 3);
 	};
 
 	reader.onload = onload;
 	reader.readAsText(input.files[0]);
     $("#placeHolder").remove();
+    $("#FullChartBtn").show();
 };
 
 
@@ -49,6 +58,7 @@ var parseInfo = function(text) {
     $sender = $xml.find('comment');
     $("#fileSender").append( $sender.text() );
 
+    
 };
 
 var showTitles = function() {
@@ -60,16 +70,93 @@ var showTitles = function() {
 
 };
 
+var reportParser = function(text, pointNumber) {
+    var xmlDoc = $.parseXML(text);
+    var reportIndex = 0;
+
+    var measuringPoint = xmlDoc.getElementsByTagName("measuringpoint")[pointNumber];
+    var measuringChannel01  = measuringPoint.childNodes[0];
+    var measuringChannel03  = measuringPoint.childNodes[1];
+
+    $getNumber = $(xmlDoc.getElementsByTagName("measuringpoint")[pointNumber]);
+    var number = $getNumber.attr('code');
+    console.log(number)
+
+    if (number == 782130212218101) {
+        $("#inputNumber"+pointNumber).append("РУ-1  0,4кВ");
+        reportIndex = 1;
+    } else  
+
+    if (number == 782130212218401) {
+        $("#inputNumber"+pointNumber).append("РУ-4  0,4кВ");
+        reportIndex = 4;
+    } else
+
+    if (number == 782130212218301) {
+        $("#inputNumber"+pointNumber).append("РУ-3  0,4кВ");
+        reportIndex = 3;
+    } else
+
+    if (number == 782130212218201) {
+        $("#inputNumber"+pointNumber).append("РУ-2  0,4кВ");
+        reportIndex = 2;
+    }
+
+    var fullWidthLabels = [];
+    var chartAP = [];
+    var chartRP = [];
+
+    chartAP.push(null);
+    chartRP.push(null);
+
+    var chartAP_sum = 0;
+    var chartRP_sum = 0;
+
+    for (var i = 0; i < measuringChannel01.childNodes.length; i++) {
+
+        $y = $(measuringChannel01.childNodes[i]);
+        $z = $(measuringChannel03.childNodes[i]);
+        $value01 = $y.find("value");
+        $value03 = $z.find("value");
+        var start = $y.attr('start');
+        var end = $y.attr('end');
+        var StartHr = start.substring(0,2);
+        var StartMin = start.substring(2,4);
+        var EndHr = end.substring(0,2);
+        var EndMin = end.substring(2,4);
+        chartAP.push($value01.text());
+        chartRP.push($value03.text());
+        fullWidthLabels.push(start.substring(0,4));
+
+
+        chartAP_sum += Number($value01.text());
+        chartRP_sum += Number($value03.text());
+
+
+        $("#values"+pointNumber).append("<tr>"+"<th>"+i+"</th>"+"<th>"+StartHr+":"+StartMin+"</th>"+"<th>"+EndHr+":"+EndMin+"</th>"+
+            "<th>"+$value01.text()+"</th>"+"<th>"+$value03.text()+"</th>"+"</tr>");
+    }
+
+    $("#valuesHeader"+pointNumber).append("<tr>"+"<th>№</th>"+"<th>"+"<p>Начало периода</p>"+"</th>"+"<th>"+
+    "<p>Окончание периода</p>"+"</th>"+"<th>"+"<p>Активная энергия (кВт*ч)</p>"+"</th>"+
+    "</p>"+"<th>"+"<p>Реактивная энергия (кВар*ч)</p>"+"</th>"+"</tr>");
+
+    $("#sumtableAPRP"+pointNumber).append("<tr>"+"<th>"+"Активная энергия"+"</th>"+"<th>"+"Реактивная энергия"+"</th>"+"</tr>"+
+    "<tr>"+"<th>"+chartAP_sum+" кВт*ч"+"</th>"+"<th>"+chartRP_sum+" кВар*ч"+"</th>"+"</tr>");
+
+
+}
+
 
 var parseReport = function(text) {
+
     var xmlDoc = $.parseXML(text);
     var reportIndex = 0;
 
     var measuringPoint = xmlDoc.getElementsByTagName("measuringpoint")[0];
     var measuringChannel01  = measuringPoint.childNodes[0];
     var measuringChannel03  = measuringPoint.childNodes[1];
-    console.log(measuringPoint);
-    console.log(measuringChannel01);
+
 
     $getNumber = $(xmlDoc.getElementsByTagName("measuringpoint")[0]);
     var number = $getNumber.attr('code');
@@ -238,13 +325,13 @@ var parseReport = function(text) {
 
 
     var ctx = document.getElementById("fullWidthChart").getContext('2d');
-    var fullChart01 = new Chart(ctx, {
+    var fullChart01RP = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: [0,2,4,6,8,10,12,14,16,18,20,22,24],
+            labels: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24],
             datasets: [{
-                label: '# of Votes',
-                data: [chartRP_120],
+                label: 'Реактивная энергия (кВар*ч)',
+                data: chartRP_60,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -262,14 +349,27 @@ var parseReport = function(text) {
                     'rgba(255, 159, 64, 1)'
                 ],
                 borderWidth: 1
-            }]
+            },
+            {
+                label: 'Активная энергия (кВт*ч)',
+                data: chartAP_60,
+                borderWidth: 1
+            }
+        ]
         },
+        
+        
         options: {
             scales: {
                 yAxes: [{
                     ticks: {
                         beginAtZero:true
-                    }
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Измеряемая величина',
+                        fontSize: 20 
+                     }
                 }]
             }
         }

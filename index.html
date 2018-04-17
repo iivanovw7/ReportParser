@@ -20,7 +20,7 @@
         <div class="col-8">
             <div><h2>Просмотр отчетов "ENERGY ALPHA"</h2>
                 <p>ООО "РУСЭНЕРГОСБЫТ" (ООО "Хоккейный клуб СКА")</p>
-                <p id="currTime">123</p>
+                <p id="currTime"></p>
             </div>
         </div>
         <div class="col-4 uploadBlock">
@@ -31,6 +31,12 @@
                            onchange='openFile(event)'
                            accept='xml'>
                     <span>Загрузить файл отчета</span>
+                </label>
+            </div>
+            <div class="file-upload uploadWrapper" id="FullChartBtn">
+                <label>
+                    <button onclick="fullChartCmd()"></button>
+                    <span>Подробный график</span>
                 </label>
             </div>
         </div>
@@ -48,18 +54,45 @@
     </div>
 
     <div class="row">
-        <canvas id="fullWidthChart" style="display: none" width="100%">ttttt</canvas>
+        <canvas id="fullWidthChart" style="display: none" width="100%">
+        </canvas>
         <div class="col-5" id="infoblock">
-            <div class="row">
-                <button onclick="fullChartCmd()">Try it</button>
-                <h5 id="inputNumber"></h5>
-                <table class="sumTable" id="sumtableAPRP" style="width:100%; margin-bottom: 20px">
+            <div class="row">     
+                <h4 id="inputNumber0"></h4>
+                <table class="sumTable" id="sumtableAPRP0" style="width:100%; margin-bottom: 20px">
                 </table>
-                <table class="mainTable" style="width:100%" id="valuesHeader">
+                <table class="mainTable" style="width:100%" id="valuesHeader0">
                 </table>
-                <table class="mainTable" style="width:100%" id="values">
+                <table class="mainTable" style="width:100%" id="values0">
                 </table>
             </div>
+            <div class="row">     
+                    <h4 id="inputNumber1"></h4>
+                    <table class="sumTable" id="sumtableAPRP1" style="width:100%; margin-bottom: 20px">
+                    </table>
+                    <table class="mainTable" style="width:100%" id="valuesHeader1">
+                    </table>
+                    <table class="mainTable" style="width:100%" id="values1">
+                    </table>
+                </div>
+            <div class="row">     
+                <h4 id="inputNumber2"></h4>
+                <table class="sumTable" id="sumtableAPRP2" style="width:100%; margin-bottom: 20px">
+                </table>
+                <table class="mainTable" style="width:100%" id="valuesHeader2">
+                </table>
+                <table class="mainTable" style="width:100%" id="values2">
+                </table>
+            </div>
+            <div class="row">     
+                    <h4 id="inputNumber3"></h4>
+                    <table class="sumTable" id="sumtableAPRP3" style="width:100%; margin-bottom: 20px">
+                    </table>
+                    <table class="mainTable" style="width:100%" id="valuesHeader3">
+                    </table>
+                    <table class="mainTable" style="width:100%" id="values3">
+                    </table>
+                </div>
         </div>
         <div class="col-7">
             <div class="column">
@@ -108,3 +141,21 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+
+
+<!--
+
+<div class="row">     
+    <h5 id="inputNumber"></h5>
+    <table class="sumTable" id="sumtableAPRP" style="width:100%; margin-bottom: 20px">
+    </table>
+    <table class="mainTable" style="width:100%" id="valuesHeader">
+    </table>
+    <table class="mainTable" style="width:100%" id="values">
+    </table>
+</div>
+
+
+-->
