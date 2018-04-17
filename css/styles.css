@@ -3,7 +3,7 @@
     background-color: rgba(244, 239, 232, 0.84);;
     margin: 20px;
     padding: 10px;
-    border: solid 1px black;
+    border: solid 1px #908b84;
 }
 
 .uploadBlock {
@@ -70,12 +70,22 @@
     background-color: #a7d39b;
 }
 
-#valuesHeader {
+#valuesHeader0, #valuesHeader1,
+#valuesHeader2, #valuesHeader3  {
     background-color: rgba(244, 239, 232, 0.84);
     padding: 2px;
 }
 
 #inputNumber, #pointType {
     margin: 10px;
+}
+
+.measuringBlock {
+    border: solid 1px #908b84;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 

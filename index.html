@@ -52,13 +52,20 @@
             <div id="timeStamp"></div>
         </div>
     </div>
-
     <div class="row">
-        <canvas id="fullWidthChart" style="display: none" width="100%">
+        <canvas id="wideChart0" style="display: none" width="100%">
         </canvas>
-        <div class="col-5" id="infoblock">
-            <div class="row">     
-                <h4 id="inputNumber0"></h4>
+        <canvas id="wideChart3" style="display: none" width="100%">
+        </canvas>
+        <canvas id="wideChart2" style="display: none" width="100%">
+        </canvas>
+        <canvas id="wideChart1" style="display: none" width="100%">
+        </canvas>
+    </div>
+    <div class="row measuringBlock">
+        <div class="col-5">
+            <div class="column">
+                <h3 id="inputNumber0"></h3>
                 <table class="sumTable" id="sumtableAPRP0" style="width:100%; margin-bottom: 20px">
                 </table>
                 <table class="mainTable" style="width:100%" id="valuesHeader0">
@@ -66,17 +73,49 @@
                 <table class="mainTable" style="width:100%" id="values0">
                 </table>
             </div>
-            <div class="row">     
-                    <h4 id="inputNumber1"></h4>
-                    <table class="sumTable" id="sumtableAPRP1" style="width:100%; margin-bottom: 20px">
-                    </table>
-                    <table class="mainTable" style="width:100%" id="valuesHeader1">
-                    </table>
-                    <table class="mainTable" style="width:100%" id="values1">
-                    </table>
-                </div>
-            <div class="row">     
-                <h4 id="inputNumber2"></h4>
+        </div>
+        <div class="col-7">
+            <div class="column">
+                <p>Активная энергия (кВт*ч) / Время окончания периода (часы)</p>
+                <div class="ct-chart ct-golden-section" id="chartAP600"></div>
+                <p>Активная энергия (кВт*ч) / Время окончания периода (часы)</p>
+                <div class="ct-chart ct-golden-section" id="chartAP1200"></div>
+                <p>Реактивная энергия (кВар*ч) / Время окончания периода (часы)</p>
+                <div class="ct-chart ct-golden-section" id="chartRP600"></div>
+                <p>Реактивная энергия (кВар*ч) / Время окончания периода (часы)</p>
+                <div class="ct-chart ct-golden-section" id="chartRP1200"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row measuringBlock">
+        <div class="col-5">
+            <div class="column">
+                <h3 id="inputNumber3"></h3>
+                <table class="sumTable" id="sumtableAPRP3" style="width:100%; margin-bottom: 20px">
+                </table>
+                <table class="mainTable" style="width:100%" id="valuesHeader3">
+                </table>
+                <table class="mainTable" style="width:100%" id="values3">
+                </table>
+            </div>
+        </div>
+        <div class="col-7">
+            <div class="column">
+                <p>Активная энергия (кВт*ч) / Время окончания периода (часы)</p>
+                <div class="ct-chart ct-golden-section" id="chartAP603"></div>
+                <p>Активная энергия (кВт*ч) / Время окончания периода (часы)</p>
+                <div class="ct-chart ct-golden-section" id="chartAP1203"></div>
+                <p>Реактивная энергия (кВар*ч) / Время окончания периода (часы)</p>
+                <div class="ct-chart ct-golden-section" id="chartRP603"></div>
+                <p>Реактивная энергия (кВар*ч) / Время окончания периода (часы)</p>
+                <div class="ct-chart ct-golden-section" id="chartRP1203"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row measuringBlock">
+        <div class="col-5">
+            <div class="column">
+                <h3 id="inputNumber2"></h3>
                 <table class="sumTable" id="sumtableAPRP2" style="width:100%; margin-bottom: 20px">
                 </table>
                 <table class="mainTable" style="width:100%" id="valuesHeader2">
@@ -84,26 +123,42 @@
                 <table class="mainTable" style="width:100%" id="values2">
                 </table>
             </div>
-            <div class="row">     
-                    <h4 id="inputNumber3"></h4>
-                    <table class="sumTable" id="sumtableAPRP3" style="width:100%; margin-bottom: 20px">
-                    </table>
-                    <table class="mainTable" style="width:100%" id="valuesHeader3">
-                    </table>
-                    <table class="mainTable" style="width:100%" id="values3">
-                    </table>
-                </div>
         </div>
         <div class="col-7">
             <div class="column">
-                <div id="chartAP60"></div>
-                <div class="ct-chart ct-golden-section" id="chart1"></div>
-                <div id="chartAP120"></div>
-                <div class="ct-chart ct-golden-section" id="chart2"></div>
-                <div id="chartRP60"></div>
-                <div class="ct-chart ct-golden-section" id="chart3"></div>
-                <div id="chartRP120"></div>
-                <div class="ct-chart ct-golden-section" id="chart4"></div>
+                <p>Активная энергия (кВт*ч) / Время окончания периода (часы)</p>
+                <div class="ct-chart ct-golden-section" id="chartAP602"></div>
+                <p>Активная энергия (кВт*ч) / Время окончания периода (часы)</p>
+                <div class="ct-chart ct-golden-section" id="chartAP1202"></div>
+                <p>Реактивная энергия (кВар*ч) / Время окончания периода (часы)</p>
+                <div class="ct-chart ct-golden-section" id="chartRP602"></div>
+                <p>Реактивная энергия (кВар*ч) / Время окончания периода (часы)</p>
+                <div class="ct-chart ct-golden-section" id="chartRP1202"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row measuringBlock">
+        <div class="col-5">
+            <div class="column">
+                <h3 id="inputNumber1"></h3>
+                <table class="sumTable" id="sumtableAPRP1" style="width:100%; margin-bottom: 20px">
+                </table>
+                <table class="mainTable" style="width:100%" id="valuesHeader1">
+                </table>
+                <table class="mainTable" style="width:100%" id="values1">
+                </table>
+            </div>
+        </div>
+        <div class="col-7">
+            <div class="column">
+                <p>Активная энергия (кВт*ч) / Время окончания периода (часы)</p>
+                <div class="ct-chart ct-golden-section" id="chartAP601"></div>
+                <p>Активная энергия (кВт*ч) / Время окончания периода (часы)</p>
+                <div class="ct-chart ct-golden-section" id="chartAP1201"></div>
+                <p>Реактивная энергия (кВар*ч) / Время окончания периода (часы)</p>
+                <div class="ct-chart ct-golden-section" id="chartRP601"></div>
+                <p>Реактивная энергия (кВар*ч) / Время окончания периода (часы)</p>
+                <div class="ct-chart ct-golden-section" id="chartRP1201"></div>
             </div>
         </div>
     </div>
@@ -126,12 +181,16 @@
 
 <script>
     function fullChartCmd() {
-        var x = document.getElementById("fullWidthChart");
+        var x = document.getElementById("wideChart0");
         if (x.style.display === "none") {
             x.style.display = "block";
+            $(".measuringBlock").hide();
+
         } else {
             x.style.display = "none";
+            $(".measuringBlock").fadeIn();
         }
+
     }
 </script>
 
@@ -144,18 +203,3 @@
 
 
 
-
-<!--
-
-<div class="row">     
-    <h5 id="inputNumber"></h5>
-    <table class="sumTable" id="sumtableAPRP" style="width:100%; margin-bottom: 20px">
-    </table>
-    <table class="mainTable" style="width:100%" id="valuesHeader">
-    </table>
-    <table class="mainTable" style="width:100%" id="values">
-    </table>
-</div>
-
-
--->
