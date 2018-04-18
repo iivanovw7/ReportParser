@@ -15,7 +15,7 @@
 
 <body>
 
-<div class="container">
+<div class="container hidden">
     <div class="row titleWrapper">
         <div class="col-8">
             <div><h2>Просмотр отчетов "ENERGY ALPHA"</h2>
@@ -34,9 +34,13 @@
                 </label>
             </div>
             <div class="file-upload uploadWrapper" id="FullChartBtn">
-                <label>
-                    <button onclick="fullChartCmd()"></button>
+                <label id="fullChart" style="display: none">
+                    <button onclick="fullChartShow()"></button>
                     <span>Подробный график</span>
+                </label>
+                <label id="tableChart" style="display: none">
+                    <button onclick="tableChartShow()"></button>
+                    <span>Сводные таблицы</span>
                 </label>
             </div>
         </div>
@@ -52,16 +56,37 @@
             <div id="timeStamp"></div>
         </div>
     </div>
-    <div class="row">
-        <canvas id="wideChart0" style="display: none" width="100%">
-        </canvas>
-        <canvas id="wideChart3" style="display: none" width="100%">
-        </canvas>
-        <canvas id="wideChart2" style="display: none" width="100%">
-        </canvas>
-        <canvas id="wideChart1" style="display: none" width="100%">
-        </canvas>
+    <div class="column" id="fullwidth" style="display: none">
+        <div class="fullChartContainer">
+            <h3>РУ-1 0,4кВ</h4>
+            <table class="sumTable" id="sumtableWide0" style="width:100%; margin-bottom: 20px">
+                </table>
+            <canvas id="wideChart0" width="100%">
+            </canvas>
+        </div>
+        <div class="fullChartContainer">
+            <h3>РУ-2 0,4кВ</h4>
+            <table class="sumTable" id="sumtableWide3" style="width:100%; margin-bottom: 20px">
+                </table>
+            <canvas id="wideChart3" width="100%">
+            </canvas>
+        </div>
+        <div class="fullChartContainer">
+            <h3>РУ-3 0,4кВ</h4>
+            <table class="sumTable" id="sumtableWide2" style="width:100%; margin-bottom: 20px">
+                </table>
+            <canvas id="wideChart2" width="100%">
+            </canvas>
+        </div>
+        <div class="fullChartContainer">
+            <h3>РУ-4 0,4кВ</h4>
+            <table class="sumTable" id="sumtableWide1" style="width:100%; margin-bottom: 20px">
+                </table>
+            <canvas id="wideChart1" width="100%">
+            </canvas>
+        </div>
     </div>
+
     <div class="row measuringBlock">
         <div class="col-5">
             <div class="column">
@@ -87,6 +112,7 @@
             </div>
         </div>
     </div>
+
     <div class="row measuringBlock">
         <div class="col-5">
             <div class="column">
@@ -112,6 +138,7 @@
             </div>
         </div>
     </div>
+
     <div class="row measuringBlock">
         <div class="col-5">
             <div class="column">
@@ -137,6 +164,7 @@
             </div>
         </div>
     </div>
+
     <div class="row measuringBlock">
         <div class="col-5">
             <div class="column">
@@ -180,18 +208,21 @@
 </script>
 
 <script>
-    function fullChartCmd() {
-        var x = document.getElementById("wideChart0");
-        if (x.style.display === "none") {
-            x.style.display = "block";
-            $(".measuringBlock").hide();
 
-        } else {
-            x.style.display = "none";
-            $(".measuringBlock").fadeIn();
-        }
-
+    function fullChartShow() {
+      $("#tableChart").fadeIn();
+      $("#fullwidth").fadeIn();
+      $("#fullChart").hide();
+       $(".measuringBlock").hide();
     }
+
+    function tableChartShow() {
+      $("#tableChart").hide();
+      $("#fullwidth").hide();
+      $("#fullChart").fadeIn();
+      $(".measuringBlock").fadeIn();
+    }
+
 </script>
 
 </body>
@@ -200,6 +231,4 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-
 

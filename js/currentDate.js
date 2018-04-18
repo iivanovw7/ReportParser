@@ -8,4 +8,3 @@ var output = d.getFullYear() + '.' +
     (day<10 ? '0' : '') + day;
 
 $( "#currentDate" ).append( output );
-console.log(output);

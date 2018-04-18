@@ -89,3 +89,18 @@
     padding-bottom: 10px;
 }
 
+.fullChartContainer {
+    border: solid 1px #908b84;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    padding: 10px;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.hidden {
+    display: none
+}
+

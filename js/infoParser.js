@@ -3,6 +3,8 @@ $( document ).ready(function() {
     $(".measuringBlock").hide();
     $("#FullChartBtn").hide();
     $("#placeHolder").append("Для вывода отчета загрузите файл с расширением XML");
+    $('.hidden').fadeIn(1000).removeClass('hidden');
+    
 });
 
 
@@ -27,6 +29,7 @@ var openFile = function(event) {
 	reader.readAsText(input.files[0]);
     $("#placeHolder").remove();
     $("#FullChartBtn").fadeIn();
+    $("#fullChart").fadeIn();
     $(".measuringBlock").fadeIn();
 };
 
@@ -87,8 +90,6 @@ var reportParser = function(text, pointNumber) {
     var chartB = "";
     var chartC = "";
     var chartD = "";
-    var wideChart = "";
-
 
     var measuringPoint = xmlDoc.getElementsByTagName("measuringpoint")[pointNumber];
     var measuringChannel01  = measuringPoint.childNodes[0];
@@ -96,46 +97,6 @@ var reportParser = function(text, pointNumber) {
 
     $getNumber = $(xmlDoc.getElementsByTagName("measuringpoint")[pointNumber]);
     var number = $getNumber.attr('code');
-
-    if (number == 782130212218101) {
-        $("#inputNumber"+pointNumber).append("РУ-1  0,4кВ");
-        reportIndex = 1;
-        chartA = "#chartAP600";
-        chartB = "#chartAP1200";
-        chartC = "#chartRP600";
-        chartD = "#chartRP1200";
-        wideChart = "#wideChart0";
-    } else  
-
-    if (number == 782130212218401) {
-        $("#inputNumber"+pointNumber).append("РУ-4  0,4кВ");
-        reportIndex = 4;
-        chartA = "#chartAP601";
-        chartB = "#chartAP1201";
-        chartC = "#chartRP601";
-        chartD = "#chartRP1201";
-        wideChart = "#wideChart1";
-    } else
-
-    if (number == 782130212218301) {
-        $("#inputNumber"+pointNumber).append("РУ-3  0,4кВ");
-        reportIndex = 3;
-        chartA = "#chartAP602";
-        chartB = "#chartAP1202";
-        chartC = "#chartRP602";
-        chartD = "#chartRP1202";
-        wideChart = "#wideChart2";
-    } else
-
-    if (number == 782130212218201) {
-        $("#inputNumber"+pointNumber).append("РУ-2  0,4кВ");
-        reportIndex = 2;
-        chartA = "#chartAP603";
-        chartB = "#chartAP1203";
-        chartC = "#chartRP603";
-        chartD = "#chartRP1203";
-        wideChart = "#wideChart3";
-    }
 
     var fullWidthLabels = [];
     var chartAP = [];
@@ -179,6 +140,9 @@ var reportParser = function(text, pointNumber) {
     $("#sumtableAPRP"+pointNumber).append("<tr>"+"<th>"+"Активная энергия"+"</th>"+"<th>"+"Реактивная энергия"+"</th>"+"</tr>"+
     "<tr>"+"<th>"+chartAP_sum+" кВт*ч"+"</th>"+"<th>"+chartRP_sum+" кВар*ч"+"</th>"+"</tr>");
 
+    $("#sumtableWide"+pointNumber).append("<tr>"+"<th>"+"Активная энергия"+"</th>"+"<th>"+"Реактивная энергия"+"</th>"+"</tr>"+
+    "<tr>"+"<th>"+chartAP_sum+" кВт*ч"+"</th>"+"<th>"+chartRP_sum+" кВар*ч"+"</th>"+"</tr>");
+
     //variables for charts
 
     var chartAP_60 = [];
@@ -201,6 +165,53 @@ var reportParser = function(text, pointNumber) {
     for (var u = 0; u < chartRP.length; u = u+4) {
         chartRP_120.push(chartRP[u]);
     };
+
+
+    //get measuring point parameters and call fullWidthChart functions separately
+    if (number == 782130212218101) {
+        $("#inputNumber"+pointNumber).append("РУ-1  0,4кВ");
+        reportIndex = 1;
+        chartA = "#chartAP600";
+        chartB = "#chartAP1200";
+        chartC = "#chartRP600";
+        chartD = "#chartRP1200";
+        drawFullWidthChart00(chartRP_60, chartAP_60);
+        
+    } else  
+
+    if (number == 782130212218401) {
+        $("#inputNumber"+pointNumber).append("РУ-4  0,4кВ");
+        reportIndex = 4;
+        chartA = "#chartAP601";
+        chartB = "#chartAP1201";
+        chartC = "#chartRP601";
+        chartD = "#chartRP1201";
+        drawFullWidthChart01(chartRP_60, chartAP_60);
+        
+    } else
+
+    if (number == 782130212218301) {
+        $("#inputNumber"+pointNumber).append("РУ-3  0,4кВ");
+        reportIndex = 3;
+        chartA = "#chartAP602";
+        chartB = "#chartAP1202";
+        chartC = "#chartRP602";
+        chartD = "#chartRP1202";
+        drawFullWidthChart02(chartRP_60, chartAP_60);
+        
+    } else
+
+    if (number == 782130212218201) {
+        $("#inputNumber"+pointNumber).append("РУ-2  0,4кВ");
+        reportIndex = 2;
+        chartA = "#chartAP603";
+        chartB = "#chartAP1203";
+        chartC = "#chartRP603";
+        chartD = "#chartRP1203";
+        drawFullWidthChart03(chartRP_60, chartAP_60);
+        
+    }
+
 
     //append chart in right bar
 
@@ -284,127 +295,225 @@ var reportParser = function(text, pointNumber) {
 
         );
 
-
-        var ctx = $(wideChart);
-
-        var fullChart01RP = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24],
-                datasets: [{
-                    label: 'Реактивная энергия (кВар*ч)',
-                    data: chartRP_60,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255,99,132,1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
-                },
-                    {
-                        label: 'Активная энергия (кВт*ч)',
-                        data: chartAP_60,
-                        borderWidth: 1
-                    }
-                ]
-            },
-
-
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero:true
-                        },
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Измеряемая величина',
-                            fontSize: 20
-                        }
-                    }]
-                }
-            }
-        });
-
-
-
-
-
-
-
+    
+        
 
 };
 
 
-/*
-
-var ctx = $(wideChart);
-
-        var fullChart01RP = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24],
-                datasets: [{
-                    label: 'Реактивная энергия (кВар*ч)',
-                    data: chartRP_60,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255,99,132,1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
-                },
-                    {
-                        label: 'Активная энергия (кВт*ч)',
-                        data: chartAP_60,
-                        borderWidth: 1
-                    }
-                ]
+var drawFullWidthChart00 = function(chartRP_60, chartAP_60) {
+    new Chart(document.getElementById("wideChart0"), {
+        type: 'line',
+        data: {
+            labels: ["0:00","1:00","2:00","3:00","4:00","5:00","6:00","7:00",
+            "8:00","9:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00",
+            "18:00","19:00","20:00","21:00","22:00","23:00","24:00"],
+            datasets: [{
+                label: 'Реактивная энергия (кВар*ч)',
+                data: chartRP_60,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
             },
-
-
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero:true
-                        },
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Измеряемая величина',
-                            fontSize: 20
-                        }
-                    }]
+                {
+                    label: 'Активная энергия (кВт*ч)',
+                    data: chartAP_60,
+                    borderWidth: 1
                 }
+            ]
+        },
+
+
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Измеряемая величина',
+                        fontSize: 20
+                    }
+                }]
             }
-        });
+        }
+    });
+}
+
+var drawFullWidthChart01 = function(chartRP_60, chartAP_60) {
+    new Chart(document.getElementById("wideChart1"), {
+        type: 'line',
+        data: {
+            labels: ["0:00","1:00","2:00","3:00","4:00","5:00","6:00","7:00",
+            "8:00","9:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00",
+            "18:00","19:00","20:00","21:00","22:00","23:00","24:00"],
+            datasets: [{
+                label: 'Реактивная энергия (кВар*ч)',
+                data: chartRP_60,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            },
+                {
+                    label: 'Активная энергия (кВт*ч)',
+                    data: chartAP_60,
+                    borderWidth: 1
+                }
+            ]
+        },
 
 
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Измеряемая величина',
+                        fontSize: 20
+                    }
+                }]
+            }
+        }
+    });
+}
+
+var drawFullWidthChart02 = function(chartRP_60, chartAP_60) {
+    new Chart(document.getElementById("wideChart2"), {
+        type: 'line',
+        data: {
+            labels: ["0:00","1:00","2:00","3:00","4:00","5:00","6:00","7:00",
+            "8:00","9:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00",
+            "18:00","19:00","20:00","21:00","22:00","23:00","24:00"],
+            datasets: [{
+                label: 'Реактивная энергия (кВар*ч)',
+                data: chartRP_60,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            },
+                {
+                    label: 'Активная энергия (кВт*ч)',
+                    data: chartAP_60,
+                    borderWidth: 1
+                }
+            ]
+        },
 
 
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Измеряемая величина',
+                        fontSize: 20
+                    }
+                }]
+            }
+        }
+    });
+}
 
- */
+var drawFullWidthChart03 = function(chartRP_60, chartAP_60) {
+    new Chart(document.getElementById("wideChart3"), {
+        type: 'line',
+        data: {
+            labels: ["0:00","1:00","2:00","3:00","4:00","5:00","6:00","7:00",
+            "8:00","9:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00",
+            "18:00","19:00","20:00","21:00","22:00","23:00","24:00"],
+            datasets: [{
+                label: 'Реактивная энергия (кВар*ч)',
+                data: chartRP_60,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            },
+                {
+                    label: 'Активная энергия (кВт*ч)',
+                    data: chartAP_60,
+                    borderWidth: 1
+                }
+            ]
+        },
 
+
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Измеряемая величина',
+                        fontSize: 20
+                    }
+                }]
+            }
+        }
+    });
+}
 
