@@ -68,19 +68,6 @@ var parseInfo = function(text) {
 };
 
 
-var ChartAP60_1 = [];
-var ChartRP60_1 = [];
-
-var ChartAP60_2 = [];
-var ChartRP60_2 = [];
-
-var ChartAP60_3 = [];
-var ChartRP60_3 = [];
-
-var ChartAP60_4 = [];
-var ChartRP60_4 = [];
-
-
 
 //xml parsing function
 var reportParser = function(text, pointNumber) {
