@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Energy reports</title>
     <link rel="stylesheet" href="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/fileUpload.css">
 
@@ -49,9 +51,9 @@
             <div id="placeHolder" class="column infoHolder"></div>
             <div id="fileSender"></div>
         </div>
-        <div class="row timeInfo">
-            <div id="fileDate"></div>
+        <div class="column timeInfo">
             <div id="timeStamp"></div>
+            <div id="fileDate"></div>
         </div>
     </div>
     <div class="column" id="fullwidth" style="display: none">
@@ -99,13 +101,13 @@
         </div>
         <div class="col-7">
             <div class="column">
-                <p>Активная энергия (кВт*ч) / Время окончания периода (часы)</p>
+                <h5>Активная энергия (кВт*ч) / Время окончания периода (часы)</h5>
                 <div class="ct-chart ct-golden-section" id="chartAP600"></div>
-                <p>Активная энергия (кВт*ч) / Время окончания периода (часы)</p>
+                <h5>Активная энергия (кВт*ч) / Время окончания периода (часы)</h5>
                 <div class="ct-chart ct-golden-section" id="chartAP1200"></div>
-                <p>Реактивная энергия (кВар*ч) / Время окончания периода (часы)</p>
-                <div class="ct-chart ct-golden-section" id="chartRP600"></div>
-                <p>Реактивная энергия (кВар*ч) / Время окончания периода (часы)</p>
+                <h5>Реактивная энергия (кВар*ч) / Время окончания периода (часы)</h5>
+                <div id="chartRP600" class="ct-chart ct-golden-section"></div>
+                <h5>Реактивная энергия (кВар*ч) / Время окончания периода (часы)</h5>
                 <div class="ct-chart ct-golden-section" id="chartRP1200"></div>
             </div>
         </div>
@@ -125,13 +127,13 @@
         </div>
         <div class="col-7">
             <div class="column">
-                <p>Активная энергия (кВт*ч) / Время окончания периода (часы)</p>
+                <h5>Активная энергия (кВт*ч) / Время окончания периода (часы)</h5>
                 <div class="ct-chart ct-golden-section" id="chartAP603"></div>
-                <p>Активная энергия (кВт*ч) / Время окончания периода (часы)</p>
+                <h5>Активная энергия (кВт*ч) / Время окончания периода (часы)</h5>
                 <div class="ct-chart ct-golden-section" id="chartAP1203"></div>
-                <p>Реактивная энергия (кВар*ч) / Время окончания периода (часы)</p>
+                <h5>Реактивная энергия (кВар*ч) / Время окончания периода (часы)</h5>
                 <div class="ct-chart ct-golden-section" id="chartRP603"></div>
-                <p>Реактивная энергия (кВар*ч) / Время окончания периода (часы)</p>
+                <h5>Реактивная энергия (кВар*ч) / Время окончания периода (часы)</h5>
                 <div class="ct-chart ct-golden-section" id="chartRP1203"></div>
             </div>
         </div>
@@ -151,13 +153,13 @@
         </div>
         <div class="col-7">
             <div class="column">
-                <p>Активная энергия (кВт*ч) / Время окончания периода (часы)</p>
+                <h5>Активная энергия (кВт*ч) / Время окончания периода (часы)</h5>
                 <div class="ct-chart ct-golden-section" id="chartAP602"></div>
-                <p>Активная энергия (кВт*ч) / Время окончания периода (часы)</p>
+                <h5>Активная энергия (кВт*ч) / Время окончания периода (часы)</h5>
                 <div class="ct-chart ct-golden-section" id="chartAP1202"></div>
-                <p>Реактивная энергия (кВар*ч) / Время окончания периода (часы)</p>
+                <h5>Реактивная энергия (кВар*ч) / Время окончания периода (часы)</h5>
                 <div class="ct-chart ct-golden-section" id="chartRP602"></div>
-                <p>Реактивная энергия (кВар*ч) / Время окончания периода (часы)</p>
+                <h5>Реактивная энергия (кВар*ч) / Время окончания периода (часы)</h5>
                 <div class="ct-chart ct-golden-section" id="chartRP1202"></div>
             </div>
         </div>
@@ -177,13 +179,13 @@
         </div>
         <div class="col-7">
             <div class="column">
-                <p>Активная энергия (кВт*ч) / Время окончания периода (часы)</p>
+                <h5>Активная энергия (кВт*ч) / Время окончания периода (часы)</h5>
                 <div class="ct-chart ct-golden-section" id="chartAP601"></div>
-                <p>Активная энергия (кВт*ч) / Время окончания периода (часы)</p>
+                <h5>Активная энергия (кВт*ч) / Время окончания периода (часы)</h5>
                 <div class="ct-chart ct-golden-section" id="chartAP1201"></div>
-                <p>Реактивная энергия (кВар*ч) / Время окончания периода (часы)</p>
+                <h5>Реактивная энергия (кВар*ч) / Время окончания периода (часы)</h5>
                 <div class="ct-chart ct-golden-section" id="chartRP601"></div>
-                <p>Реактивная энергия (кВар*ч) / Время окончания периода (часы)</p>
+                <h5>Реактивная энергия (кВар*ч) / Время окончания периода (часы)</h5>
                 <div class="ct-chart ct-golden-section" id="chartRP1201"></div>
             </div>
         </div>

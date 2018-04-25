@@ -23,10 +23,15 @@
 .dateStyle {
     text-decoration: underline;
     color: red;
+    
 }
 
 .timeInfo div {
     margin-right: 10px;
+}
+
+#fileDate {
+    margin-top: 10px;
 }
 
 .mainTable {
@@ -103,4 +108,15 @@
 .hidden {
     display: none
 }
+
+
+#chartRP600.ct-chart, #chartRP1200.ct-chart,
+#chartRP603.ct-chart, #chartRP1203.ct-chart,
+#chartRP602.ct-chart, #chartRP1202.ct-chart,
+#chartRP601.ct-chart, #chartRP1201.ct-chart {
+       stroke-width: 5px;
+       stroke-dasharray: 15px 2px;
+}
+
+
 

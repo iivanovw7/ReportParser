@@ -7,11 +7,30 @@ $( document ).ready(function() {
     
 });
 
+var fullChartShow = function() {
+    $("#tableChart").fadeIn();
+    $("#fullwidth").fadeIn();
+    $("#fullChart").hide();
+     $(".measuringBlock").hide();
+  }
+
+var tableChartShow = function() {
+    $("#tableChart").hide();
+    $("#fullwidth").hide();
+    $("#fullChart").fadeIn();
+    $(".measuringBlock").fadeIn();
+  }
+
+var initialChartShow = function() {
+    $("#tableChart").hide();
+    $("#fullwidth").hide();
+    $("#fullChart").fadeIn();
+  }
+
 
 
 //upload xml file function
 //calling parsing function with measuring point id
-
 var openFile = function(event) {
 	var input = event.target;
 	var text = "";
@@ -26,7 +45,9 @@ var openFile = function(event) {
 	};
 
 	reader.onload = onload;
-	reader.readAsText(input.files[0]);
+    reader.readAsText(input.files[0]);
+    
+    initialChartShow();
     $("#placeHolder").remove();
     $("#FullChartBtn").fadeIn();
     $("#fullChart").fadeIn();
@@ -36,6 +57,11 @@ var openFile = function(event) {
 
 //show report information block
 var parseInfo = function(text) {
+
+    $("#fileDate").empty();
+    $("#timeStamp").empty();
+    $("#fileSender").empty();
+
 	var xmlDoc = $.parseXML(text),
 		$xml = $(xmlDoc),
 		$fileDate = $xml.find('day');
@@ -46,7 +72,7 @@ var parseInfo = function(text) {
     var day         = dateString.substring(6,8);
     var date      	= year+'.'+month+'.'+day;
 
-    $("#fileDate").append( "Дата формирования отчета: " + "<span class=\"dateStyle\" >" + date +"</span>" + " (гггг.мм.дд)" );
+    $("#fileDate").append( "Отчетный период: " + "<span class=\"dateStyle\" >" + date +"</span>" + " (гггг.мм.дд)" );
 
     $timeStamp = $xml.find('timestamp');
     var stampString = $timeStamp.text();
@@ -66,6 +92,19 @@ var parseInfo = function(text) {
 
     
 };
+
+
+var ChartAP60_1 = [];
+var ChartRP60_1 = [];
+
+var ChartAP60_2 = [];
+var ChartRP60_2 = [];
+
+var ChartAP60_3 = [];
+var ChartRP60_3 = [];
+
+var ChartAP60_4 = [];
+var ChartRP60_4 = [];
 
 
 
@@ -120,6 +159,10 @@ var reportParser = function(text, pointNumber) {
             "<th>"+$value01.text()+"</th>"+"<th>"+$value03.text()+"</th>"+"</tr>");
     }
 
+    $("#valuesHeader"+pointNumber).empty();
+    $("#sumtableAPRP"+pointNumber).empty();
+    $("#sumtableWide"+pointNumber).empty();
+
     $("#valuesHeader"+pointNumber).append("<tr>"+"<th>№</th>"+"<th>"+"<p>Начало периода</p>"+"</th>"+"<th>"+
     "<p>Окончание периода</p>"+"</th>"+"<th>"+"<p>Активная энергия (кВт*ч)</p>"+"</th>"+
     "</p>"+"<th>"+"<p>Реактивная энергия (кВар*ч)</p>"+"</th>"+"</tr>");
@@ -129,6 +172,7 @@ var reportParser = function(text, pointNumber) {
 
     $("#sumtableWide"+pointNumber).append("<tr>"+"<th>"+"Активная энергия"+"</th>"+"<th>"+"Реактивная энергия"+"</th>"+"</tr>"+
     "<tr>"+"<th>"+chartAP_sum+" кВт*ч"+"</th>"+"<th>"+chartRP_sum+" кВар*ч"+"</th>"+"</tr>");
+
 
     //variables for charts
 
@@ -156,6 +200,7 @@ var reportParser = function(text, pointNumber) {
 
     //get measuring point parameters and call fullWidthChart functions separately
     if (number == 782130212218101) {
+        $("#inputNumber"+pointNumber).empty()
         $("#inputNumber"+pointNumber).append("РУ-1  0,4кВ");
         reportIndex = 1;
         chartA = "#chartAP600";
@@ -167,6 +212,7 @@ var reportParser = function(text, pointNumber) {
     } else  
 
     if (number == 782130212218401) {
+        $("#inputNumber"+pointNumber).empty()
         $("#inputNumber"+pointNumber).append("РУ-4  0,4кВ");
         reportIndex = 4;
         chartA = "#chartAP601";
@@ -178,6 +224,7 @@ var reportParser = function(text, pointNumber) {
     } else
 
     if (number == 782130212218301) {
+        $("#inputNumber"+pointNumber).empty()
         $("#inputNumber"+pointNumber).append("РУ-3  0,4кВ");
         reportIndex = 3;
         chartA = "#chartAP602";
@@ -189,6 +236,7 @@ var reportParser = function(text, pointNumber) {
     } else
 
     if (number == 782130212218201) {
+        $("#inputNumber"+pointNumber).empty()
         $("#inputNumber"+pointNumber).append("РУ-2  0,4кВ");
         reportIndex = 2;
         chartA = "#chartAP603";
@@ -298,28 +346,21 @@ var drawFullWidthChart00 = function(chartRP_60, chartAP_60) {
             datasets: [{
                 label: 'Реактивная энергия (кВар*ч)',
                 data: chartRP_60,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255,99,132,1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
+                fill: true,
+                backgroundColor: "rgba(66, 129, 191,0.3)",
+                borderColor: "rgba(66, 129, 191,1)",
+                pointBorderColor: "#fff",
+                pointBackgroundColor: "rgba(66, 129, 191,1)",
             },
                 {
                     label: 'Активная энергия (кВт*ч)',
                     data: chartAP_60,
-                    borderWidth: 1
+                    fill: true,
+                    backgroundColor: "rgba(255,99,132,0.2)",
+                    borderColor: "rgba(255,99,132,1)",
+                    pointBorderColor: "#fff",
+                    pointBackgroundColor: "rgba(255,99,132,1)",
+                    pointBorderColor: "#fff",
                 }
             ]
         },
@@ -352,28 +393,21 @@ var drawFullWidthChart01 = function(chartRP_60, chartAP_60) {
             datasets: [{
                 label: 'Реактивная энергия (кВар*ч)',
                 data: chartRP_60,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255,99,132,1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
+                fill: true,
+                backgroundColor: "rgba(66, 129, 191,0.3)",
+                borderColor: "rgba(66, 129, 191,1)",
+                pointBorderColor: "#fff",
+                pointBackgroundColor: "rgba(66, 129, 191,1)",
             },
                 {
                     label: 'Активная энергия (кВт*ч)',
                     data: chartAP_60,
-                    borderWidth: 1
+                    fill: true,
+                    backgroundColor: "rgba(255,99,132,0.2)",
+                    borderColor: "rgba(255,99,132,1)",
+                    pointBorderColor: "#fff",
+                    pointBackgroundColor: "rgba(255,99,132,1)",
+                    pointBorderColor: "#fff",
                 }
             ]
         },
@@ -406,28 +440,21 @@ var drawFullWidthChart02 = function(chartRP_60, chartAP_60) {
             datasets: [{
                 label: 'Реактивная энергия (кВар*ч)',
                 data: chartRP_60,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255,99,132,1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
+                fill: true,
+                backgroundColor: "rgba(66, 129, 191,0.3)",
+                borderColor: "rgba(66, 129, 191,1)",
+                pointBorderColor: "#fff",
+                pointBackgroundColor: "rgba(66, 129, 191,1)",
             },
                 {
                     label: 'Активная энергия (кВт*ч)',
                     data: chartAP_60,
-                    borderWidth: 1
+                    fill: true,
+                    backgroundColor: "rgba(255,99,132,0.2)",
+                    borderColor: "rgba(255,99,132,1)",
+                    pointBorderColor: "#fff",
+                    pointBackgroundColor: "rgba(255,99,132,1)",
+                    pointBorderColor: "#fff",
                 }
             ]
         },
@@ -460,28 +487,21 @@ var drawFullWidthChart03 = function(chartRP_60, chartAP_60) {
             datasets: [{
                 label: 'Реактивная энергия (кВар*ч)',
                 data: chartRP_60,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255,99,132,1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
+                fill: true,
+                backgroundColor: "rgba(66, 129, 191,0.3)",
+                borderColor: "rgba(66, 129, 191,1)",
+                pointBorderColor: "#fff",
+                pointBackgroundColor: "rgba(66, 129, 191,1)",
             },
                 {
                     label: 'Активная энергия (кВт*ч)',
                     data: chartAP_60,
-                    borderWidth: 1
+                    fill: true,
+                    backgroundColor: "rgba(255,99,132,0.2)",
+                    borderColor: "rgba(255,99,132,1)",
+                    pointBorderColor: "#fff",
+                    pointBackgroundColor: "rgba(255,99,132,1)",
+                    pointBorderColor: "#fff",
                 }
             ]
         },
