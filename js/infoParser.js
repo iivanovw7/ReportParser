@@ -42,6 +42,7 @@ var openFile = function(event) {
         reportParser(text, 1);
         reportParser(text, 2);
         reportParser(text, 3);
+        reportSumTables();
 	};
 
 	reader.onload = onload;
@@ -106,6 +107,61 @@ var ChartRP60_3 = [];
 var ChartAP60_4 = [];
 var ChartRP60_4 = [];
 
+var chartAP_sum_1 = 0;
+var chartRP_sum_1 = 0;
+
+var chartAP_sum_2 = 0;
+var chartRP_sum_2 = 0;
+
+var chartAP_sum_3 = 0;
+var chartRP_sum_3 = 0;
+
+var chartAP_sum_4 = 0;
+var chartRP_sum_4 = 0;
+
+// function saving AR RP values to global variables, to form overrall sum report
+var overallSum = function(value_AR, value_RP, pointNumber) {
+    
+    switch(pointNumber) {
+        case 0:
+            chartAP_sum_1 = value_AR;
+            chartRP_sum_1 = value_RP;
+            break;
+        case 1:
+            chartAP_sum_4 = value_AR;
+            chartRP_sum_4 = value_RP;
+            break;
+        case 2:
+            chartAP_sum_3 = value_AR;
+            chartRP_sum_3 = value_RP;
+            break;
+        case 3:
+            chartAP_sum_2 = value_AR;
+            chartRP_sum_2 = value_RP;
+            break;
+        default:
+            break;
+    }
+
+
+}
+
+//function exports sum data to titleWrapper
+var reportSumTables = function() {
+
+    var AP = chartAP_sum_1 + chartAP_sum_2 + chartAP_sum_3 + chartAP_sum_4;
+    var RP = chartRP_sum_1 + chartRP_sum_2 + chartRP_sum_3 + chartRP_sum_4;
+
+    $("#sumtableAPRP_header").empty();
+    $("#sumtableAPRP_title").empty();
+
+    $("#sumtableAPRP_title").append("<span>"+"Накопленные данные по отчету:"+"</span>");
+
+    $("#sumtableAPRP_header").append("<tr>"+"<th>"+"Активная энергия"+"</th>"+"<th>"+"Реактивная энергия"+"</th>"+"</tr>"+
+    "<tr>"+"<th>"+AP+" кВт*ч"+"</th>"+"<th>"+RP+" кВар*ч"+"</th>"+"</tr>");
+
+}
+
 
 
 //xml parsing function
@@ -134,6 +190,8 @@ var reportParser = function(text, pointNumber) {
     var chartAP_sum = 0;
     var chartRP_sum = 0;
 
+    $("#values"+pointNumber).empty();
+
     for (var i = 0; i < measuringChannel01.childNodes.length; i++) {
 
         $y = $(measuringChannel01.childNodes[i]);
@@ -154,7 +212,7 @@ var reportParser = function(text, pointNumber) {
         chartAP_sum += Number($value01.text());
         chartRP_sum += Number($value03.text());
 
-
+       
         $("#values"+pointNumber).append("<tr>"+"<th>"+i+"</th>"+"<th>"+StartHr+":"+StartMin+"</th>"+"<th>"+EndHr+":"+EndMin+"</th>"+
             "<th>"+$value01.text()+"</th>"+"<th>"+$value03.text()+"</th>"+"</tr>");
     }
@@ -162,6 +220,7 @@ var reportParser = function(text, pointNumber) {
     $("#valuesHeader"+pointNumber).empty();
     $("#sumtableAPRP"+pointNumber).empty();
     $("#sumtableWide"+pointNumber).empty();
+
 
     $("#valuesHeader"+pointNumber).append("<tr>"+"<th>№</th>"+"<th>"+"<p>Начало периода</p>"+"</th>"+"<th>"+
     "<p>Окончание периода</p>"+"</th>"+"<th>"+"<p>Активная энергия (кВт*ч)</p>"+"</th>"+
@@ -173,6 +232,7 @@ var reportParser = function(text, pointNumber) {
     $("#sumtableWide"+pointNumber).append("<tr>"+"<th>"+"Активная энергия"+"</th>"+"<th>"+"Реактивная энергия"+"</th>"+"</tr>"+
     "<tr>"+"<th>"+chartAP_sum+" кВт*ч"+"</th>"+"<th>"+chartRP_sum+" кВар*ч"+"</th>"+"</tr>");
 
+    overallSum(chartAP_sum, chartRP_sum, pointNumber);
 
     //variables for charts
 

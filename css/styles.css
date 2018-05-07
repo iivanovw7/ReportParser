@@ -118,5 +118,26 @@
        stroke-dasharray: 15px 2px;
 }
 
+.headerSum {
+    margin-left: 20px;
+}
 
+.headerTable {
+    font-size: 1.6ch;
+    text-decoration: none;
+    font-style: italic;
+    border: 1px lightgray solid;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
 
+.headerTable th {
+    max-width: 300px;
+    text-align: center;
+    border: 1px lightgray solid;
+    justify-content: center;
+    align-items: center;
+    padding: 3px;
+    background-color: #a7d39b;
+}
